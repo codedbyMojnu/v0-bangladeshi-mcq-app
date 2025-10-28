@@ -1,7 +1,7 @@
-"use client"
-import QuestionPaper from "@/components/question-paper"
-import { Button } from "@/components/ui/button"
-import { Printer } from "lucide-react"
+"use client";
+import QuestionPaper from "@/components/question-paper";
+import { Button } from "@/components/ui/button";
+import { Printer } from "lucide-react";
 
 const rawQuestions = [
   // Normal Questions
@@ -26,7 +26,12 @@ const rawQuestions = [
   {
     type: "normal",
     question: "বাংলাদেশের প্রথম রাষ্ট্রপতি কে ছিলেন?",
-    options: ["শেখ মুজিবুর রহমান", "সৈয়দ নজরুল ইসলাম", "আবু সাঈদ চৌধুরী", "জিল্লুর রহমান"],
+    options: [
+      "শেখ মুজিবুর রহমান",
+      "সৈয়দ নজরুল ইসলাম",
+      "আবু সাঈদ চৌধুরী",
+      "জিল্লুর রহমান",
+    ],
     correctAnswer: "আবু সাঈদ চৌধুরী",
   },
   {
@@ -41,13 +46,23 @@ const rawQuestions = [
       "বাংলাদেশ দক্ষিণ এশিয়ার একটি গুরুত্বপূর্ণ দেশ। এটি তিনটি বড় নদী দ্বারা গঠিত - পদ্মা, মেঘনা এবং ব্রহ্মপুত্র। এই নদীগুলি বাংলাদেশের অর্থনীতি এবং কৃষিতে গুরুত্বপূর্ণ ভূমিকা পালন করে। বাংলাদেশের মোট জনসংখ্যা প্রায় ১৭ কোটি।",
     questions: [
       {
-        question: "বাংলাদেশের প্রধান নদীগুলি কোনগুলি?",
-        options: ["গঙ্গা, যমুনা, ব্রহ্মপুত্র", "পদ্মা, মেঘনা, ব্রহ্মপুত্র", "সুরমা, কুশিয়ারা, মেঘনা", "তিস্তা, করতোয়া, যমুনা"],
-        correctAnswer: "পদ্মা, মেঘনা, ব্রহ্মপুত্র",
+        type: "multiStatement",
+        question: "বাংলাদেশের বড় নদী কোনটি?",
+        statements: ["i. পদ্মা", "ii. মেঘনা", "iii. সুরমিলা"],
+        questionEnd: "নিচের কোনটি সঠিক?",
+        options: ["A. i & ii", "B. i & iii", "C. ii & iii", "D. শুধুমাত্র iii"],
+        correctAnswer: "A. i & ii",
       },
       {
-        question: "নদীগুলি বাংলাদেশের কোন ক্ষেত্রে গুরুত্বপূর্ণ ভূমিকা পালন করে?",
-        options: ["শুধুমাত্র পরিবহনে", "শুধুমাত্র মৎস্য শিল্পে", "অর্থনীতি এবং কৃষিতে", "শুধুমাত্র পর্যটনে"],
+        type: "normal",
+        question:
+          "নদীগুলি বাংলাদেশের কোন ক্ষেত্রে গুরুত্বপূর্ণ ভূমিকা পালন করে?",
+        options: [
+          "শুধুমাত্র পরিবহনে",
+          "শুধুমাত্র মৎস্য শিল্পে",
+          "অর্থনীতি এবং কৃষিতে",
+          "শুধুমাত্র পর্যটনে",
+        ],
         correctAnswer: "অর্থনীতি এবং কৃষিতে",
       },
       {
@@ -60,7 +75,12 @@ const rawQuestions = [
   {
     type: "normal",
     question: "বাংলাদেশের জাতীয় সংগীত কে রচনা করেছেন?",
-    options: ["রবীন্দ্রনাথ ঠাকুর", "কাজী নজরুল ইসলাম", "দ্বিজেন্দ্রলাল রায়", "সালিল চৌধুরী"],
+    options: [
+      "রবীন্দ্রনাথ ঠাকুর",
+      "কাজী নজরুল ইসলাম",
+      "দ্বিজেন্দ্রলাল রায়",
+      "সালিল চৌধুরী",
+    ],
     correctAnswer: "রবীন্দ্রনাথ ঠাকুর",
   },
   {
@@ -72,7 +92,11 @@ const rawQuestions = [
   {
     type: "multiStatement",
     question: "বাংলাদেশের ভৌগোলিক বৈশিষ্ট্য সম্পর্কে কোনটি সঠিক?",
-    statements: ["i. বাংলাদেশ একটি নদীমাতৃক দেশ", "ii. বাংলাদেশের বেশিরভাগ অঞ্চল সমতল", "iii. বাংলাদেশ সম্পূর্ণভাবে পর্বতময়"],
+    statements: [
+      "i. বাংলাদেশ একটি নদীমাতৃক দেশ",
+      "ii. বাংলাদেশের বেশিরভাগ অঞ্চল সমতল",
+      "iii. বাংলাদেশ সম্পূর্ণভাবে পর্বতময়",
+    ],
     questionEnd: "নিচের কোনটি সঠিক?",
     options: ["A. i & ii", "B. i & iii", "C. ii & iii", "D. শুধুমাত্র iii"],
     correctAnswer: "A. i & ii",
@@ -86,16 +110,25 @@ const rawQuestions = [
   {
     type: "passage",
     passage:
-      "বাংলা ভাষা আন্দোলন ১৯৫২ সালে সংঘটিত হয়েছিল। এই আন্দোলনে অনেক শিক্ষার্থী তাদের প্রাণ দিয়েছিলেন। ২১ ফেব্রুয়ারি এই আন্দোলনের সবচেয়ে গুরুত্বপূর্ণ দিন। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে পরিচিত।",
+      "বাংলা ভাষা আন্দোলন ১৯৫২ সালে সংঘটিত হয়েছিল। এই আন্দোলনে অনেক শিক্ষার্থী তাদের প্রাণ দিয়েছিলেন। ২১ ফেব্রুয়ারি এই আন্দোলনের সবচেয়ে গুরুত্বপূর্ণ দিন। এই দিনটি এখন আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে পরিচিত। এছাড়াও ১৯৬৯, ১৯৭১ সাল বাংলাদেশের গুরুত্বপূর্ণ বছর",
     questions: [
       {
-        question: "বাংলা ভাষা আন্দোলন কোন সালে সংঘটিত হয়েছিল?",
-        options: ["১৯৪৭", "১৯৫০", "১৯৫২", "১৯৫৬"],
-        correctAnswer: "১৯৫২",
+        type: "multiStatement",
+        question: "বাংলাদেশের গুরুত্বপূর্ণ সাল?",
+        statements: ["i. ১৯৫২", "ii. ১৯৬৯", "iii. ১৯৭১"],
+        questionEnd: "নিচের কোনটি সঠিক?",
+        options: ["A. i & ii", "B. i & iii", "C. ii & iii", "D. i, ii, & iii"],
+        correctAnswer: "D. i, ii & iii",
       },
       {
+        type: "normal",
         question: "২১ ফেব্রুয়ারি এখন কোন দিবস হিসেবে পরিচিত?",
-        options: ["জাতীয় দিবস", "আন্তর্জাতিক মাতৃভাষা দিবস", "স্বাধীনতা দিবস", "বিজয় দিবস"],
+        options: [
+          "জাতীয় দিবস",
+          "আন্তর্জাতিক মাতৃভাষা দিবস",
+          "স্বাধীনতা দিবস",
+          "বিজয় দিবস",
+        ],
         correctAnswer: "আন্তর্জাতিক মাতৃভাষা দিবস",
       },
     ],
@@ -137,23 +170,6 @@ const rawQuestions = [
     correctAnswer: "হাডুডু",
   },
   {
-    type: "passage",
-    passage:
-      "রবীন্দ্রনাথ ঠাকুর বাংলা সাহিত্যের সবচেয়ে বিখ্যাত ব্যক্তিত্ব। তিনি ১৯১৩ সালে নোবেল পুরস্কার জিতেছিলেন। তার সৃজনশীলতা বাংলা সাহিত্যকে নতুন উচ্চতায় নিয়ে গেছে। তার রচনা বিশ্বব্যাপী স্বীকৃত এবং প্রশংসিত।",
-    questions: [
-      {
-        question: "রবীন্দ্রনাথ ঠাকুর কোন সালে নোবেল পুরস্কার জিতেছিলেন?",
-        options: ["১৯১০", "১৯১২", "১৯১৩", "১৯১৫"],
-        correctAnswer: "১৯১৩",
-      },
-      {
-        question: "রবীন্দ্রনাথ ঠাকুর কোন বিষয়ে নোবেল পুরস্কার পেয়েছিলেন?",
-        options: ["বিজ্ঞান", "সাহিত্য", "শান্তি", "অর্থনীতি"],
-        correctAnswer: "সাহিত্য",
-      },
-    ],
-  },
-  {
     type: "normal",
     question: "বাংলাদেশের সর্ববৃহৎ বাজার কোনটি?",
     options: ["নিউমার্কেট", "শাঁখারীবাজার", "চাঁদনী চক", "সদরঘাট"],
@@ -162,13 +178,22 @@ const rawQuestions = [
   {
     type: "normal",
     question: "বাংলাদেশের প্রথম বিশ্ববিদ্যালয় কোনটি?",
-    options: ["ঢাকা বিশ্ববিদ্যালয়", "চট্টগ্রাম বিশ্ববিদ্যালয়", "রাজশাহী বিশ্ববিদ্যালয়", "জাহাঙ্গীরনগর বিশ্ববিদ্যালয়"],
+    options: [
+      "ঢাকা বিশ্ববিদ্যালয়",
+      "চট্টগ্রাম বিশ্ববিদ্যালয়",
+      "রাজশাহী বিশ্ববিদ্যালয়",
+      "জাহাঙ্গীরনগর বিশ্ববিদ্যালয়",
+    ],
     correctAnswer: "ঢাকা বিশ্ববিদ্যালয়",
   },
   {
     type: "multiStatement",
     question: "বাংলাদেশের অর্থনীতি সম্পর্কে কোনটি সঠিক?",
-    statements: ["i. বাংলাদেশের প্রধান শিল্প পোশাক শিল্প", "ii. বাংলাদেশ কৃষিপ্রধান দেশ", "iii. বাংলাদেশের কোনো রপ্তানি নেই"],
+    statements: [
+      "i. বাংলাদেশের প্রধান শিল্প পোশাক শিল্প",
+      "ii. বাংলাদেশ কৃষিপ্রধান দেশ",
+      "iii. বাংলাদেশের কোনো রপ্তানি নেই",
+    ],
     questionEnd: "নিচের কোনটি সঠিক?",
     options: ["A. i & ii", "B. i & iii", "C. ii & iii", "D. শুধুমাত্র iii"],
     correctAnswer: "A. i & ii",
@@ -191,19 +216,10 @@ const rawQuestions = [
       "বাংলাদেশের মুক্তিযুদ্ধ ১৯৭১ সালে সংঘটিত হয়েছিল। এই যুদ্ধে লক্ষ লক্ষ মানুষ প্রাণ হারিয়েছিলেন। ১৬ ডিসেম্বর বাংলাদেশ চূড়ান্ত বিজয় অর্জন করেছিল। এই দিনটি এখন বিজয় দিবস হিসেবে পালিত হয়।",
     questions: [
       {
+        type: "normal",
         question: "বাংলাদেশের মুক্তিযুদ্ধ কোন সালে সংঘটিত হয়েছিল?",
         options: ["১৯৬৯", "১৯৭০", "১৯৭১", "১৯৭২"],
         correctAnswer: "১৯৭১",
-      },
-      {
-        question: "বাংলাদেশ কোন তারিখে চূড়ান্ত বিজয় অর্জন করেছিল?",
-        options: ["১০ ডিসেম্বর", "১৪ ডিসেম্বর", "১৬ ডিসেম্বর", "২০ ডিসেম্বর"],
-        correctAnswer: "১৬ ডিসেম্বর",
-      },
-      {
-        question: "বিজয় দিবস কোন তারিখে পালিত হয়?",
-        options: ["১০ ডিসেম্বর", "১৪ ডিসেম্বর", "১৬ ডিসেম্বর", "২০ ডিসেম্বর"],
-        correctAnswer: "১৬ ডিসেম্বর",
       },
     ],
   },
@@ -249,14 +265,22 @@ const rawQuestions = [
       "বাংলাদেশের পর্যটন শিল্প অত্যন্ত সমৃদ্ধ। সুন্দরবন বিশ্বের বৃহত্তম ম্যানগ্রোভ বন। কক্সবাজার বিশ্বের দীর্ঘতম সমুদ্র সৈকত। সিলেটের চা বাগান বিশ্বখ্যাত।",
     questions: [
       {
+        type: "normal",
         question: "সুন্দরবন কী ধরনের বন?",
         options: ["পাইন বন", "ম্যানগ্রোভ বন", "শাল বন", "সেগুন বন"],
         correctAnswer: "ম্যানগ্রোভ বন",
       },
       {
-        question: "কক্সবাজার কিসের জন্য বিখ্যাত?",
-        options: ["পর্বত", "সমুদ্র সৈকত", "চা বাগান", "বন"],
-        correctAnswer: "সমুদ্র সৈকত",
+        type: "multiStatement",
+        question: "বাংলাদেশের শিক্ষা ব্যবস্থা সম্পর্কে কোনটি সঠিক?",
+        statements: [
+          "i. বাংলাদেশে প্রাথমিক শিক্ষা বাধ্যতামূলক",
+          "ii. বাংলাদেশে কোনো বিশ্ববিদ্যালয় নেই",
+          "iii. বাংলাদেশে শিক্ষার হার ক্রমাগত বৃদ্ধি পাচ্ছে",
+        ],
+        questionEnd: "নিচের কোনটি সঠিক?",
+        options: ["A. i & ii", "B. i & iii", "C. ii & iii", "D. শুধুমাত্র ii"],
+        correctAnswer: "B. i & iii",
       },
     ],
   },
@@ -269,10 +293,15 @@ const rawQuestions = [
   {
     type: "normal",
     question: "বাংলাদেশের সবচেয়ে বড় হ্রদ কোনটি?",
-    options: ["কাপ্তাই হ্রদ", "নয়াগাঁও হ্রদ", "টাঙ্গুয়ার হাওর", "হাকালুকি হাওর"],
+    options: [
+      "কাপ্তাই হ্রদ",
+      "নয়াগাঁও হ্রদ",
+      "টাঙ্গুয়ার হাওর",
+      "হাকালুকি হাওর",
+    ],
     correctAnswer: "কাপ্তাই হ্রদ",
   },
-]
+];
 
 const questions = rawQuestions.flatMap((q, idx) => {
   if (q.type === "passage") {
@@ -282,22 +311,27 @@ const questions = rawQuestions.flatMap((q, idx) => {
       question: pq.question,
       options: pq.options,
       correctAnswer: pq.correctAnswer,
-    }))
+    }));
   }
-  return [q]
-})
+  return [q];
+});
 
 export default function Home() {
   const handlePrint = () => {
-    window.print()
-  }
+    window.print();
+  };
 
   return (
     <main className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8 no-print">
-          <h1 className="text-3xl font-bold text-primary">MCQ Question Paper</h1>
-          <Button onClick={handlePrint} className="flex items-center gap-2 bg-primary hover:bg-primary/90">
+          <h1 className="text-3xl font-bold text-primary">
+            MCQ Question Paper
+          </h1>
+          <Button
+            onClick={handlePrint}
+            className="flex items-center gap-2 bg-primary hover:bg-primary/90"
+          >
             <Printer className="w-4 h-4" />
             Print Question Paper
           </Button>
@@ -306,5 +340,5 @@ export default function Home() {
         <QuestionPaper questions={questions} />
       </div>
     </main>
-  )
+  );
 }
