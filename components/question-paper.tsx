@@ -2,6 +2,7 @@
 
 import MultiStatementQuestion from "./multi-statement-question";
 import NormalQuestion from "./normal-question";
+import PassageQuestion from "./passage-question";
 
 interface Question {
   type: string;
@@ -45,115 +46,97 @@ export default function QuestionPaper({ questions }: QuestionPaperProps) {
           <div className="grid grid-cols-2 gap-4">
             {/* Column 1 */}
             <div className="space-y-1.5">
-              {page.col1.map((question, idx) => {
-                const questionNumber =
-                  pageIdx * questionsPerColumn * 2 + idx + 1;
-                return (
-                  <div key={idx}>
-                    {question.type === "normal" && (
-                      <NormalQuestion
-                        question={question}
-                        questionNumber={questionNumber}
-                      />
-                    )}
-                    {question.type === "multiStatement" && (
-                      <MultiStatementQuestion
-                        question={question}
-                        questionNumber={questionNumber}
-                      />
-                    )}
-                    {question.type === "passage" && (
-                      <div>
-                        {question.passage && (
-                          <div className="border border-muted-foreground/30 rounded-sm p-2 bg-gray-100 mb-1.5">
-                            <p className="text-xs font-semibold text-primary mb-1">
-                              উদ্দীপক:
-                            </p>
-                            <p className="text-xs leading-tight text-foreground">
-                              {question.passage}
-                            </p>
-                          </div>
+              {(() => {
+                let runningNumber = pageIdx * questionsPerColumn * 2 + 1;
+                const elements = [];
+                for (let idx = 0; idx < page.col1.length; idx++) {
+                  const question = page.col1[idx];
+                  if (
+                    question.type === "passage" &&
+                    question.passage &&
+                    question.questions
+                  ) {
+                    for (let c = 0; c < question.questions.length; c++) {
+                      elements.push(
+                        <PassageQuestion
+                          key={`passage-${idx}`}
+                          question={question}
+                          questionNumber={runningNumber}
+                        />
+                      );
+                      runningNumber += question.questions.length;
+                      break;
+                    }
+                  } else {
+                    elements.push(
+                      <div key={idx}>
+                        {question.type === "normal" && (
+                          <NormalQuestion
+                            question={question}
+                            questionNumber={runningNumber}
+                          />
                         )}
-                        <p className="text-xs font-medium text-foreground mb-1">
-                          {questionNumber}. {question.question}
-                        </p>
-                        <div className="space-y-0.5 ml-3">
-                          {question.options.map((option, optIdx) => (
-                            <label
-                              key={optIdx}
-                              className="flex items-center gap-1.5 text-xs cursor-pointer"
-                            >
-                              <input
-                                type="radio"
-                                name={`q${questionNumber}`}
-                                className="w-3 h-3"
-                              />
-                              <span>{option}</span>
-                            </label>
-                          ))}
-                        </div>
+                        {question.type === "multiStatement" && (
+                          <MultiStatementQuestion
+                            question={question}
+                            questionNumber={runningNumber}
+                          />
+                        )}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
+                    );
+                    runningNumber++;
+                  }
+                }
+                return elements;
+              })()}
             </div>
 
             {/* Column 2 */}
             <div className="space-y-1.5">
-              {page.col2.map((question, idx) => {
-                const questionNumber =
-                  pageIdx * questionsPerColumn * 2 +
-                  questionsPerColumn +
-                  idx +
-                  1;
-                return (
-                  <div key={idx}>
-                    {question.type === "normal" && (
-                      <NormalQuestion
-                        question={question}
-                        questionNumber={questionNumber}
-                      />
-                    )}
-                    {question.type === "multiStatement" && (
-                      <MultiStatementQuestion
-                        question={question}
-                        questionNumber={questionNumber}
-                      />
-                    )}
-                    {question.type === "passage" && (
-                      <div>
-                        {question.passage && (
-                          <div className="border border-muted-foreground/30 rounded-sm p-2 bg-gray-100 mb-1.5">
-                            <p className="text-xs font-semibold text-primary mb-1">
-                              উদ্দীপক:
-                            </p>
-                            <p className="text-xs leading-tight text-foreground">
-                              {question.passage}
-                            </p>
-                          </div>
+              {(() => {
+                let runningNumber =
+                  pageIdx * questionsPerColumn * 2 + questionsPerColumn + 1;
+                const elements = [];
+                for (let idx = 0; idx < page.col2.length; idx++) {
+                  const question = page.col2[idx];
+                  if (
+                    question.type === "passage" &&
+                    question.passage &&
+                    question.questions
+                  ) {
+                    for (let c = 0; c < question.questions.length; c++) {
+                      elements.push(
+                        <PassageQuestion
+                          key={`passage2-${idx}`}
+                          question={question}
+                          questionNumber={runningNumber}
+                        />
+                      );
+                      runningNumber += question.questions.length;
+                      break;
+                    }
+                  } else {
+                    elements.push(
+                      <div key={idx}>
+                        {question.type === "normal" && (
+                          <NormalQuestion
+                            question={question}
+                            questionNumber={runningNumber}
+                          />
                         )}
-                        {question.questions.map((question, idx) => (
-                          <div>
-                            {question.type === "normal" && (
-                              <NormalQuestion
-                                question={question}
-                                questionNumber={questionNumber}
-                              />
-                            )}
-                            {question.type === "multiStatement" && (
-                              <MultiStatementQuestion
-                                question={question}
-                                questionNumber={questionNumber}
-                              />
-                            )}
-                          </div>
-                        ))}
+                        {question.type === "multiStatement" && (
+                          <MultiStatementQuestion
+                            question={question}
+                            questionNumber={runningNumber}
+                          />
+                        )}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
+                    );
+                    runningNumber++;
+                  }
+                }
+                return elements;
+              })()}
             </div>
           </div>
 

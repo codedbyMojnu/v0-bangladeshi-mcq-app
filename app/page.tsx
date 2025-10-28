@@ -66,6 +66,7 @@ const rawQuestions = [
         correctAnswer: "অর্থনীতি এবং কৃষিতে",
       },
       {
+        type: "normal",
         question: "বাংলাদেশের মোট জনসংখ্যা প্রায় কত?",
         options: ["১০ কোটি", "১৫ কোটি", "১৭ কোটি", "২০ কোটি"],
         correctAnswer: "১৭ কোটি",
@@ -303,18 +304,7 @@ const rawQuestions = [
   },
 ];
 
-const questions = rawQuestions.flatMap((q, idx) => {
-  if (q.type === "passage") {
-    return q.questions.map((pq, pidx) => ({
-      type: "passage",
-      passage: pidx === 0 ? q.passage : null,
-      question: pq.question,
-      options: pq.options,
-      correctAnswer: pq.correctAnswer,
-    }));
-  }
-  return [q];
-});
+const questions = rawQuestions;
 
 export default function Home() {
   const handlePrint = () => {
